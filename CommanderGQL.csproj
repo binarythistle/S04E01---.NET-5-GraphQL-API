@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="4.4.1" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="11.0.8" />
+    <PackageReference Include="HotChocolate.Data.Entityframework" Version="11.0.8" />
+    <PackageReference Include="Microsoft.EntityframeworkCore.Design" Version="5.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityframeworkCore.SqlServer" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>
