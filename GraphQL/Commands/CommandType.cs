@@ -10,13 +10,29 @@ namespace CommanderGQL.GraphQL.Commands
     {
         protected override void Configure(IObjectTypeDescriptor<Command> descriptor)
         {
-            descriptor.Description("Respresents any executable command");
+            descriptor.Description("Represents any executable command.");
+
+            descriptor
+                .Field(c => c.Id)
+                .Description("Represents the unique ID for the command.");
+
+            descriptor
+                .Field(c => c.HowTo)
+                .Description("Represents the how-to for the command.");
+
+            descriptor
+                .Field(c => c.CommandLine)
+                .Description("Represents the command line.");
+
+            descriptor
+                .Field(c => c.PlatformId)
+                .Description("Represents the unique ID of the platform which the command belongs.");
 
             descriptor
                 .Field(c => c.Platform)
                 .ResolveWith<Resolvers>(c => c.GetPlatform(default!, default!))
                 .UseDbContext<AppDbContext>()
-                .Description("This is the platform to which the command belongs");
+                .Description("This is the platform to which the command belongs.");
 
         }
 
