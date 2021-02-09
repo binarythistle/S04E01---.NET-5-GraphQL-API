@@ -15,7 +15,7 @@ namespace CommanderGQL.GraphQL
         /// <summary>
         /// Gets the queryable <see cref="Platform"/>.
         /// </summary>
-        /// <param name="dbContext">The <see cref="AppDbContext"/>.</param>
+        /// <param name="context">The <see cref="AppDbContext"/>.</param>
         /// <returns>The queryable <see cref="Platform"/>.</returns>
         [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
@@ -29,7 +29,7 @@ namespace CommanderGQL.GraphQL
         /// <summary>
         /// Gets the queryable <see cref="Command"/>.
         /// </summary>
-        /// <param name="dbContext">The <see cref="AppDbContext"/>.</param>
+        /// <param name="context">The <see cref="AppDbContext"/>.</param>
         /// <returns>The queryable <see cref="Command"/>.</returns>
         [UseDbContext(typeof(AppDbContext))]
         [UseFiltering]
