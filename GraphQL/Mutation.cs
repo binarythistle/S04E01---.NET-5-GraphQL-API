@@ -10,9 +10,22 @@ using HotChocolate.Subscriptions;
 
 namespace CommanderGQL.GraphQL
 {
+    /// <summary>
+    /// Represents the mutations available.
+    /// </summary>
+    [GraphQLDescription("Represents the mutations available.")]
     public class Mutation
     {
+        /// <summary>
+        /// Adds a <see cref="Platform"/> based on <paramref name="input"/>.
+        /// </summary>
+        /// <param name="input">The <see cref="AddPlatformInput"/>.</param>
+        /// <param name="context">The <see cref="AppDbContext"/>.</param>
+        /// <param name="eventSender">The <see cref="ITopicEventSender"/>.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
+        /// <returns>The added <see cref="Platform"/>.</returns>
         [UseDbContext(typeof(AppDbContext))]
+        [GraphQLDescription("Adds a platform.")]
         public async Task<AddPlatformPayload> AddPlatformAsync(
             AddPlatformInput input,
             [ScopedService] AppDbContext context,
@@ -32,7 +45,14 @@ namespace CommanderGQL.GraphQL
                 return new AddPlatformPayload(platform);
             }
 
+        /// <summary>
+        /// Adds a <see cref="Command"/> based on <paramref name="input"/>.
+        /// </summary>
+        /// <param name="input">The <see cref="AddCommandInput"/>.</param>
+        /// <param name="context">The <see cref="AppDbContext"/>.</param>
+        /// <returns>The added <see cref="Command"/>.</returns>
         [UseDbContext(typeof(AppDbContext))]
+        [GraphQLDescription("Adds a command.")]
         public async Task<AddCommandPayload> AddCommandAsync(AddCommandInput input,
             [ScopedService] AppDbContext context)
             {

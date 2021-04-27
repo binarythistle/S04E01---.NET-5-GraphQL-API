@@ -37,7 +37,11 @@ namespace CommanderGQL
                 .AddMutationType<Mutation>()
                 .AddSubscriptionType<Subscription>()
                 .AddType<PlatformType>()
+                .AddType<AddPlatformInputType>()
+                .AddType<AddPlatformPayloadType>()
                 .AddType<CommandType>()
+                .AddType<AddCommandInputType>()
+                .AddType<AddCommandPayloadType>()
                 .AddFiltering()
                 .AddSorting()
                 .AddInMemorySubscriptions();
