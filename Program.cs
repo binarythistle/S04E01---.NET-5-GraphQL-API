@@ -1,6 +1,7 @@
 using CommanderGQL.Data;
 using CommanderGQL.GraphQL;
 using GraphQL.Server.Ui.Voyager;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using CommanderGQL.GraphQL.Commands;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ builder.Services
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
     .AddSubscriptionType<Subscription>()
+    .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = builder.Environment.IsDevelopment())
     .AddType<PlatformType>()
     .AddType<CommandType>()
     .AddFiltering()
