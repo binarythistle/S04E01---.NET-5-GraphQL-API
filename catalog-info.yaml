@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: .NET 5 GraphQL API
+  annotations:
+    github.com/project-slug: binarythistle/S04E01---.NET-5-GraphQL-API
+spec:
+  type: other
+  lifecycle: unknown
+  owner: binarythistle
