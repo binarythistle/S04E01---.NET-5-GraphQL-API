@@ -1,26 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using CommanderGQL.Data;
+using CommanderGQL.GraphQL;
+using GraphQL.Server.Ui.Voyager;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Builder;
+using CommanderGQL.GraphQL.Commands;
+using Microsoft.EntityFrameworkCore;
+using CommanderGQL.GraphQL.Platforms;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CommanderGQL
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddPooledDbContextFactory<AppDbContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("CommandConStr")));
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<Query>()
+    .AddMutationType<Mutation>()
+    .AddSubscriptionType<Subscription>()
+    .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = builder.Environment.IsDevelopment())
+    .AddType<PlatformType>()
+    .AddType<CommandType>()
+    .AddFiltering()
+    .AddSorting()
+    .AddInMemorySubscriptions();
+
+var app = builder.Build();
+app.UseWebSockets();
+app.UseRouting();
+app.UseEndpoints(endpoints =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    endpoints.MapGraphQL();
+});
+app.UseGraphQLVoyager("/graphql-voyager", new VoyagerOptions()
+{
+    GraphQLEndPoint = "/graphql"
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+app.Run();
